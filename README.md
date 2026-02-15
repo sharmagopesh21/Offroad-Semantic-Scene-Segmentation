@@ -3,6 +3,7 @@
 This project implements a state-of-the-art (SOTA) semantic segmentation model for offroad environments using DINOv2 as the backbone (fine-tuned on a custom dataset). The model segments images into 10 classes: Background, Trees, Lush Bushes, Dry Grass, Dry Bushes, Ground Clutter, Logs, Rocks, Landscape, and Sky.
 
 Key features:
+
 - **Backbone**: DINOv2 Large (unfrozen for fine-tuning).
 - **Decoder Head**: Deep ConvNeXt-style for robust feature decoding.
 - **Loss**: Hybrid (Dice + CrossEntropy) for better segmentation accuracy.
@@ -52,7 +53,7 @@ The project includes scripts for training/fine-tuning and testing/inference. It 
    - **Training/Validation Data**: Download or prepare the `Offroad_Segmentation_Training_Dataset` folder. It should contain `train` and `val` subfolders, each with `Color_Images` (RGB images) and `Segmentation` (mask images). Place this folder in the root project directory.
    - **Test Data**: Download or prepare the `Offroad_Segmentation_testImages` folder. It should contain a `Color_Images` subfolder (RGB images) and optionally a `Segmentation` subfolder (for metrics calculation). Place this folder in the root project directory.
    - **Sample Output Images**: For reference, view generated test results (masks, colored masks, comparisons) from a sample run at [this Google Drive folder](https://drive.google.com/drive/folders/1lYoZwMcMZ5TjodcnzLkdTGyOGdibf3HH?usp=sharing).
-   - **Project Report**: Detailed report available at [https://drive.google.com/file/d/1esB1kI3RKUqnn4NbpNOGmwlqfIbfkMIo/view?usp=sharing](Reaport).
+   - **Project Report**: Detailed report available at [Report](https://drive.google.com/file/d/1esB1kI3RKUqnn4NbpNOGmwlqfIbfkMIo/view?usp=sharing).
 
 ## Directory Structure
 
@@ -84,6 +85,7 @@ offroad_segmentation_project/
 ## How to Run
 
 ### 1. Training/Fine-Tuning
+
 - Ensure the `Offroad_Segmentation_Training_Dataset` folder is in the root directory.
 - Navigate to the `codes` subfolder in your terminal/command prompt.
 - Activate the virtual environment (if not already): `..\venv\Scripts\activate` (Windows, from codes/) or `source ../venv/bin/activate` (Linux/Mac).
@@ -101,6 +103,7 @@ offroad_segmentation_project/
 - After training, the best model is saved in the `codes` subfolder for use in testing.
 
 ### 2. Testing/Inference
+
 - Ensure the `Offroad_Segmentation_testImages` folder is in the root directory and `best_segmentation_model.pth` is in the `codes` subfolder.
 - Navigate to the `codes` subfolder in your terminal/command prompt.
 - Activate the virtual environment (as above).
@@ -131,6 +134,6 @@ offroad_segmentation_project/
 ## Results and Report
 
 - Sample test outputs (masks and comparisons) from a run on desktop: [Google Drive Folder](https://drive.google.com/drive/folders/1lYoZwMcMZ5TjodcnzLkdTGyOGdibf3HH?usp=sharing).
-- Full project report (including metrics, architecture details, and ablation studies): [https://drive.google.com/file/d/1esB1kI3RKUqnn4NbpNOGmwlqfIbfkMIo/view?usp=sharing](Report).
+- Full project report (including metrics, architecture details, and ablation studies): [Report](https://drive.google.com/file/d/1esB1kI3RKUqnn4NbpNOGmwlqfIbfkMIo/view?usp=sharing).
 
 For questions or improvements, contact the project maintainer.
