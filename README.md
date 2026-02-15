@@ -135,5 +135,3 @@ offroad_segmentation_project/
 
 - Sample test outputs (masks and comparisons) from a run on desktop: [Google Drive Folder](https://drive.google.com/drive/folders/1lYoZwMcMZ5TjodcnzLkdTGyOGdibf3HH?usp=sharing).
 - Full project report (including metrics, architecture details, and ablation studies): [Report](https://drive.google.com/file/d/1esB1kI3RKUqnn4NbpNOGmwlqfIbfkMIo/view?usp=sharing).
-
-For questions or improvements, contact the project maintainer.
