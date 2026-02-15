@@ -52,7 +52,7 @@ The project includes scripts for training/fine-tuning and testing/inference. It 
    - **Training/Validation Data**: Download or prepare the `Offroad_Segmentation_Training_Dataset` folder. It should contain `train` and `val` subfolders, each with `Color_Images` (RGB images) and `Segmentation` (mask images). Place this folder in the root project directory.
    - **Test Data**: Download or prepare the `Offroad_Segmentation_testImages` folder. It should contain a `Color_Images` subfolder (RGB images) and optionally a `Segmentation` subfolder (for metrics calculation). Place this folder in the root project directory.
    - **Sample Output Images**: For reference, view generated test results (masks, colored masks, comparisons) from a sample run at [this Google Drive folder](https://drive.google.com/drive/folders/1lYoZwMcMZ5TjodcnzLkdTGyOGdibf3HH?usp=sharing).
-   - **Project Report**: Detailed report available at [xyz.com](xyz.com).
+   - **Project Report**: Detailed report available at [https://drive.google.com/file/d/1esB1kI3RKUqnn4NbpNOGmwlqfIbfkMIo/view?usp=sharing](Reaport).
 
 ## Directory Structure
 
@@ -131,6 +131,6 @@ offroad_segmentation_project/
 ## Results and Report
 
 - Sample test outputs (masks and comparisons) from a run on desktop: [Google Drive Folder](https://drive.google.com/drive/folders/1lYoZwMcMZ5TjodcnzLkdTGyOGdibf3HH?usp=sharing).
-- Full project report (including metrics, architecture details, and ablation studies): [xyz.com](xyz.com).
+- Full project report (including metrics, architecture details, and ablation studies): [https://drive.google.com/file/d/1esB1kI3RKUqnn4NbpNOGmwlqfIbfkMIo/view?usp=sharing](Report).
 
 For questions or improvements, contact the project maintainer.
