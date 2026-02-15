@@ -22,30 +22,33 @@ The project includes scripts for training/fine-tuning and testing/inference. It 
 ## Setup Instructions
 
 1. **Clone or Download the Project**:
+   - Create a root project directory (e.g., `offroad_segmentation_project`).
+   - Inside it, create a subfolder named `codes`.
    - Download the project files: `train_segmentation_finetune.py`, `test.py`, and `create_and_install.bat`.
-   - Place them in a root project directory (e.g., `offroad_segmentation_project`).
+   - Place these files in the `codes` subfolder.
 
 2. **Create Virtual Environment and Install Dependencies**:
+   - Navigate to the `codes` subfolder in your terminal/command prompt.
    - Run the provided batch script to set up a virtual environment and install required packages:
      ```
      create_and_install.bat
      ```
    - This will:
-     - Create a virtual environment named `venv`.
+     - Create a virtual environment named `venv` (in the root project directory, as the script uses relative paths).
      - Activate it.
      - Upgrade pip.
      - Install core packages: `torch`, `torchvision`, `numpy`, `matplotlib`, `pillow`, `opencv-python`.
-   - If you're on Linux/Mac, manually run:
+   - If you're on Linux/Mac, navigate to `codes` and manually run:
      ```
-     python -m venv venv
-     source venv/bin/activate  # or venv\Scripts\activate on Windows
+     python -m venv ../venv  # Creates venv in root
+     source ../venv/bin/activate  # or ../venv\Scripts\activate on Windows
      pip install --upgrade pip
      pip install torch torchvision numpy matplotlib pillow opencv-python
      ```
    - Note: Torch will automatically install with CUDA support if available. Verify with `python -c "import torch; print(torch.cuda.is_available())"`.
 
 3. **Download Required Resources**:
-   - **Pre-trained Model (`best_segmentation_model.pth`)**: Download from [this Google Drive link](https://drive.google.com/file/d/1d7SBJ1QpKa4XLaaYyhyaYlRO1kkF_t69/view?usp=sharing). Place it in the root project directory (next to `test.py`).
+   - **Pre-trained Model (`best_segmentation_model.pth`)**: Download from [this Google Drive link](https://drive.google.com/file/d/1d7SBJ1QpKa4XLaaYyhyaYlRO1kkF_t69/view?usp=sharing). Place it in the `codes` subfolder.
    - **Training/Validation Data**: Download or prepare the `Offroad_Segmentation_Training_Dataset` folder. It should contain `train` and `val` subfolders, each with `Color_Images` (RGB images) and `Segmentation` (mask images). Place this folder in the root project directory.
    - **Test Data**: Download or prepare the `Offroad_Segmentation_testImages` folder. It should contain a `Color_Images` subfolder (RGB images) and optionally a `Segmentation` subfolder (for metrics calculation). Place this folder in the root project directory.
    - **Sample Output Images**: For reference, view generated test results (masks, colored masks, comparisons) from a sample run at [this Google Drive folder](https://drive.google.com/drive/folders/1lYoZwMcMZ5TjodcnzLkdTGyOGdibf3HH?usp=sharing).
@@ -57,10 +60,11 @@ Organize your project root directory as follows:
 
 ```
 offroad_segmentation_project/
-├── train_segmentation_finetune.py       # Training script
-├── test.py                              # Testing/inference script
-├── create_and_install.bat               # Setup script (Windows)
-├── best_segmentation_model.pth          # Downloaded pre-trained model
+├── codes/                               # Contains all scripts and the model
+│   ├── train_segmentation_finetune.py   # Training script
+│   ├── test.py                          # Testing/inference script
+│   ├── create_and_install.bat           # Setup script (Windows)
+│   └── best_segmentation_model.pth      # Downloaded pre-trained model
 ├── Offroad_Segmentation_Training_Dataset/  # Training data folder
 │   ├── train/
 │   │   ├── Color_Images/                # RGB training images (.png/.jpg)
@@ -71,13 +75,9 @@ offroad_segmentation_project/
 ├── Offroad_Segmentation_testImages/     # Test data folder
 │   ├── Color_Images/                    # RGB test images (.png/.jpg)
 │   └── Segmentation/                    # Optional: Mask images for metrics (.png)
-└── test_results/                        # Auto-generated during testing
-    ├── masks/                           # Raw prediction masks (0-9 values)
-    ├── masks_color/                     # Colored prediction masks
-    └── comparisons/                     # Side-by-side input/truth/prediction images
 ```
 
-- The `test_results/` folder will be created automatically when running `test.py`.
+- The `test_results/` folder will be created automatically in the `codes` subfolder when running `test.py`.
 - Ensure image and mask filenames match exactly (e.g., `image1.png` in `Color_Images` pairs with `image1.png` in `Segmentation`).
 - Masks are expected to be single-channel images with raw pixel values (e.g., 0, 100, 200, etc.), which are mapped to class IDs 0-9 during processing.
 
@@ -85,7 +85,8 @@ offroad_segmentation_project/
 
 ### 1. Training/Fine-Tuning
 - Ensure the `Offroad_Segmentation_Training_Dataset` folder is in the root directory.
-- Activate the virtual environment (if not already): `venv\Scripts\activate` (Windows) or `source venv/bin/activate` (Linux/Mac).
+- Navigate to the `codes` subfolder in your terminal/command prompt.
+- Activate the virtual environment (if not already): `..\venv\Scripts\activate` (Windows, from codes/) or `source ../venv/bin/activate` (Linux/Mac).
 - Run the training script:
   ```
   python train_segmentation_finetune.py
@@ -94,23 +95,24 @@ offroad_segmentation_project/
   - Downloads DINOv2 automatically if not cached.
   - Trains for 19 epochs (configurable in script).
   - Uses gradient accumulation for effective batch size of 8.
-  - Saves the best model as `best_segmentation_model.pth` based on validation IoU.
+  - Saves the best model as `best_segmentation_model.pth` in the `codes` subfolder based on validation IoU.
   - Logs progress to console (suitable for `nohup python train_segmentation_finetune.py > train.log &` in headless mode).
   - Expected runtime: ~1-2 hours per epoch on a high-end GPU (e.g., RTX 3090).
-- After training, the best model is saved in the root directory for use in testing.
+- After training, the best model is saved in the `codes` subfolder for use in testing.
 
 ### 2. Testing/Inference
-- Ensure the `Offroad_Segmentation_testImages` folder and `best_segmentation_model.pth` are in the root directory.
+- Ensure the `Offroad_Segmentation_testImages` folder is in the root directory and `best_segmentation_model.pth` is in the `codes` subfolder.
+- Navigate to the `codes` subfolder in your terminal/command prompt.
 - Activate the virtual environment (as above).
 - Run the testing script:
   ```
   python test.py
   ```
 - **Details**:
-  - Loads the model from `best_segmentation_model.pth`.
-  - Processes all images in `Offroad_Segmentation_testImages/Color_Images`.
+  - Loads the model from `best_segmentation_model.pth` in the `codes` subfolder.
+  - Processes all images in `../Offroad_Segmentation_testImages/Color_Images`.
   - If masks are provided in `Segmentation`, calculates mIoU and per-class IoU.
-  - Generates outputs in `test_results/`:
+  - Generates outputs in `test_results/` (inside `codes`):
     - Raw masks (grayscale, values 0-9).
     - Colored masks (using a predefined palette).
     - Comparisons (input + ground truth + prediction) for the first 50 images.
@@ -120,10 +122,11 @@ offroad_segmentation_project/
 ## Troubleshooting
 
 - **Out of Memory (OOM)**: Reduce `BATCH_SIZE` to 1 or use a smaller backbone (change `BACKBONE_SIZE` to "base" or "small" in scripts).
-- **Missing Directories**: Ensure data folders exist and are correctly named/structured.
+- **Missing Directories**: Ensure data folders exist and are correctly named/structured in the root.
 - **No GPU Detected**: Check CUDA installation. Fall back to CPU by setting `device = 'cpu'` in scripts (slow).
-- **Package Issues**: Re-run the setup script or manually install missing packages (e.g., `pip install facebookresearch/dinov2` if DINOv2 fails to load).
+- **Package Issues**: Re-run the setup script from `codes` or manually install missing packages (e.g., `pip install facebookresearch/dinov2` if DINOv2 fails to load).
 - **Mask Conversion Errors**: Ensure masks are single-channel PNGs with the exact raw values from `value_map` (0, 100, 200, etc.).
+- **Path Errors**: If scripts can't find data folders, verify you're running from the `codes` subfolder, as paths are relative to the script location.
 
 ## Results and Report
 
